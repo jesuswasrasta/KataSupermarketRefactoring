@@ -10,39 +10,40 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CheckoutTest {
     @Test
-    void _1Apple_Costs_50cents() {
+    void apple() {
         //Arrange
-        List<String> items = new ArrayList<>();
-        items.add("apple");
-        Map<String, Pair<Integer, Integer>> listPrice = new HashMap<>();
+        List<String> il = new ArrayList<>();
+        il.add("apple");
+        Map<String, Pair<Integer, Integer>> ll = new HashMap<>();
         Checkout checkout = new Checkout();
 
         //Act
-        int result = checkout.pay(items, listPrice);
+        int result = checkout.pay(il, ll);
 
         //Assert
         assertEquals(50, result);
     }
 
     @Test
-    void _3Apples2Pears1Banana_Costs_455cents() {
+    void fruits() {
         //Arrange
-        List<String> items = new ArrayList<>();
-        items.add("apple");
-        items.add("pear");
-        items.add("apple");
-        items.add("pear");
-        items.add("apple");
-        items.add("banana");
+        List<String> it = new ArrayList<>();
+        it.add("apple");
+        it.add("pear");
+        it.add("apple");
+        it.add("pear");
+        it.add("apple");
+        it.add("banana");
+        it.add("bear");
 
-        Map<String, Pair<Integer, Integer>> listPrice = new HashMap<>();
-        listPrice.put("apple", new Pair<>(3, 130));
-        listPrice.put("pear", new Pair<>(2, 45));
+        Map<String, Pair<Integer, Integer>> ll = new HashMap<>();
+        ll.put("apple", new Pair<>(3, 130));
+        ll.put("pear", new Pair<>(2, 45));
 
         Checkout checkout = new Checkout();
 
         //Act
-        int result = checkout.pay(items, listPrice);
+        int result = checkout.pay(it, ll);
 
         //Assert
         assertEquals(235, result);
