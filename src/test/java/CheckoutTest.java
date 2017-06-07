@@ -25,7 +25,7 @@ class CheckoutTest {
     }
 
     @Test
-    void _3Apples2Pears1Pineapple1Banana_Costs_455cents() {
+    void _3Apples2Pears1Banana_Costs_455cents() {
         //Arrange
         List<String> items = new ArrayList<>();
         items.add("apple");
@@ -33,7 +33,6 @@ class CheckoutTest {
         items.add("apple");
         items.add("pear");
         items.add("apple");
-        items.add("pineapple");
         items.add("banana");
 
         Map<String, Pair<Integer, Integer>> listPrice = new HashMap<>();
@@ -46,6 +45,6 @@ class CheckoutTest {
         int result = checkout.pay(items, listPrice);
 
         //Assert
-        assertEquals(455, result);
+        assertEquals(235, result);
     }
 }

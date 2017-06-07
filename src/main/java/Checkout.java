@@ -16,7 +16,7 @@ public class Checkout {
         Map<String, Integer> listPrice = new HashMap<>();
         listPrice.put("apple", 50);
         listPrice.put("pear", 30);
-        listPrice.put("pineapple", 220);
+        listPrice.put("pineapple", 20);
         listPrice.put("banana", 60);
 
         for (String item : items) {
