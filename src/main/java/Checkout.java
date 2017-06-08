@@ -36,6 +36,7 @@ public class Checkout {
             }
         }
 
+        //Here I have to cycle through every offer to see if it applies
         for (Entry entry : offers.entrySet()) {
             switch (entry.getKey().toString()) {
                 case "apple":
@@ -43,6 +44,12 @@ public class Checkout {
                     if (a >= a1) { res += (int) ((Pair) entry.getValue()).getValue(); }
                     a -= a1;
                     break;
+                    //jb 2008-09-12: don't sell lychee anymore, but maybe in the future...
+//                case "lychee":
+//                    int a2 = (int) ((Pair) entry.getValue()).getKey();
+//                    if (p >= a2) { res += (int) ((Pair) entry.getValue()).getValue(); }
+//                    p -= a2;
+//                    break;
                 case "pear":
                     int a2 = (int) ((Pair) entry.getValue()).getKey();
                     if (p >= a2) { res += (int) ((Pair) entry.getValue()).getValue(); }
