@@ -54,6 +54,15 @@ public class CheckoutTest {
     }
 
     @Test
+    public void whatDoesItHappenIfITryToSellStrawberries() throws Exception {
+        String strawberry = "strawberry";
+
+        int expectedPrice = 123;
+
+        assertEquals(expectedPrice, checkout.pay(forFruits(strawberry), withNoOffers));
+    }
+
+    @Test
     public void fruits() {
         String apple = "apple";
         String pear = "pear";

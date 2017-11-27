@@ -5,84 +5,77 @@ import java.util.Map.Entry;
 
 public class Checkout {
     public int pay(List<String> items, Map<String, Entry<Integer, Integer>> offers) {
-        int res = 0;
-        int a = 0;
-        int p = 0;
-        int ananas = 0;
-        int b = 0;
+        int grandTotal = 0;
+        int apples = 0;
+        int pears = 0;
+        int pineapples = 0;
+        int banana = 0;
 
-        Map<String, Integer> map = new HashMap<>();
-        map.put("apple", 50);
-        map.put("pear", 30);
-        map.put("pineapple", 220);
-        map.put("banana", 60);
+        Map<String, Integer> priceList = new HashMap<>();
+        priceList.put("apple", 50);
+        priceList.put("pear", 30);
+        priceList.put("pineapple", 220);
+        priceList.put("banana", 60);
 
         for (String item : items) {
             switch (item) {
                 case "apple":
-                    a++;
+                    apples++;
                     break;
                 case "pear":
-                    p++;
+                    pears++;
                     break;
                 case "pineapple":
-                    ananas++;
+                    pineapples++;
                     break;
                 case "banana":
-                    b++;
+                    banana++;
                     break;
             }
         }
 
-        //Here I have to cycle through every offer to see if it applies
         for (Entry entry : offers.entrySet()) {
             switch (entry.getKey().toString()) {
                 case "apple":
                     int a1 = (int) ((Entry) entry.getValue()).getKey();
-                    if (a >= a1) { res += (int) ((Entry) entry.getValue()).getValue(); }
-                    a -= a1;
+                    if (apples >= a1) { grandTotal += (int) ((Entry) entry.getValue()).getValue(); }
+                    apples -= a1;
                     break;
-                    //jb 2008-09-12: don't sell lychee anymore, but maybe in the future...
-//                case "lychee":
-//                    int a2 = (int) ((Entry) entry.getValue()).getKey();
-//                    if (p >= a2) { res += (int) ((Entry) entry.getValue()).getValue(); }
-//                    p -= a2;
-//                    break;
                 case "pear":
                     int a2 = (int) ((Entry) entry.getValue()).getKey();
-                    if (p >= a2) { res += (int) ((Entry) entry.getValue()).getValue(); }
-                    p -= a2;
+                    if (pears >= a2) { grandTotal += (int) ((Entry) entry.getValue()).getValue(); }
+                    pears -= a2;
                     break;
                 case "pineapple":
                     int a3 = (int) ((Entry) entry.getValue()).getKey();
-                    if (ananas >= a3) { res += (int) ((Entry) entry.getValue()).getValue(); }
-                    ananas -= a3;
+                    if (pineapples >= a3) { grandTotal += (int) ((Entry) entry.getValue()).getValue(); }
+                    pineapples -= a3;
                     break;
                 case "banana":
                     int a4 = (int) ((Entry) entry.getValue()).getKey();
-                    if (b >= a4) { res += (int) ((Entry) entry.getValue()).getValue(); }
-                    b -= a4;
+                    if (banana >= a4) { grandTotal += (int) ((Entry) entry.getValue()).getValue(); }
+                    banana -= a4;
                     break;
             }
         }
 
-        for (Entry entry : map.entrySet()) {
+        for (Entry entry : priceList.entrySet()) {
             switch (entry.getKey().toString()) {
                 case "apple":
-                    res += a * (int) entry.getValue();
+                    grandTotal += apples * (int) entry.getValue();
                     break;
                 case "pear":
-                    res += p * (int) entry.getValue();
+                    grandTotal += pears * (int) entry.getValue();
                     break;
                 case "pineapple":
-                    res += ananas * (int) entry.getValue();
+                    grandTotal += pineapples * (int) entry.getValue();
                     break;
                 case "banana":
-                    res += b * (int) entry.getValue();
+                    grandTotal += banana * (int) entry.getValue();
                     break;
             }
         }
 
-        return res;
+        return grandTotal;
     }
 }
