@@ -30,7 +30,7 @@ public class CheckoutTest {
     }
 
     @Test
-    public void apple() {
+    public void shouldSellAnApple() {
         int expectedPrice = 50;
         assertEquals(expectedPrice, checkout.pay(forFruits("apple"), withNoOffers));
     }
@@ -47,12 +47,10 @@ public class CheckoutTest {
 
     @Test
     public void aBananaCosts60() throws Exception {
+        String banana = "banana";
 
-        Map<String, Entry<Integer, Integer>> withOffers = withOffers(1, "banana", 60);
-
-        int result = checkout.pay(forFruits("banana"), withOffers);
-
-        assertEquals(60, result);
+        int expectedPrice = 60;
+        assertEquals(expectedPrice, checkout.pay(forFruits(banana), withOffers(1, banana, 60)));
     }
 
     @Test
