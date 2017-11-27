@@ -10,6 +10,18 @@ import static org.junit.Assert.assertEquals;
 
 public class CheckoutTest {
 
+    private Map<String, Entry<Integer, Integer>> withOffers(int quantity, String pineapple, int offerPrice) {
+        Map<String, Entry<Integer, Integer>> offers = new HashMap<>();
+        offers.put(pineapple, new SimpleEntry<>(quantity, offerPrice));
+        return offers;
+    }
+
+    private List<String> forFruits(String... fruits) {
+        return Arrays.asList(fruits);
+    }
+
+    Map<String, Entry<Integer, Integer>> withNoOffers = new HashMap<>();
+
     private Checkout checkout;
 
     @Before
@@ -19,58 +31,46 @@ public class CheckoutTest {
 
     @Test
     public void apple() {
-        //Arrange
-        List<String> il = forFruits("apple");
-        Map<String, Entry<Integer, Integer>> ll = new HashMap<>();
-
-        //Act
-        int result = checkout.pay(il, ll);
-
-        //Assert
-        assertEquals(50, result);
+        int expectedPrice = 50;
+        assertEquals(expectedPrice, checkout.pay(forFruits("apple"), withNoOffers));
     }
 
     @Test
     public void aPineappleCosts220() throws Exception {
-        List<String> itemsList = forFruits("pineapple");
 
-        Map<String, Entry<Integer, Integer>> offers = new HashMap<>();
-        offers.put("pineapple", new SimpleEntry<>(1, 220));
+        String pineapple = "pineapple";
 
-        int result = checkout.pay(itemsList, offers);
-
-        assertEquals(220, result);
+        int expectedPrice = 220;
+        assertEquals(expectedPrice, checkout.pay(forFruits(pineapple),
+                withOffers(1, pineapple, 220)));
     }
 
     @Test
     public void aBananaCosts60() throws Exception {
 
-        Map<String, Entry<Integer, Integer>> withOffers = new HashMap<>();
-        withOffers.put("banana", new SimpleEntry<>(1, 60));
+        Map<String, Entry<Integer, Integer>> withOffers = withOffers(1, "banana", 60);
 
         int result = checkout.pay(forFruits("banana"), withOffers);
 
         assertEquals(60, result);
     }
 
-    private List<String> forFruits(String... fruits) {
-        return Arrays.asList(fruits);
-    }
-
     @Test
     public void fruits() {
         String apple = "apple";
         String pear = "pear";
-
-        Map<String, Entry<Integer, Integer>> ll = new HashMap<>();
-        ll.put("apple", new SimpleEntry<>(3, 130));
-        ll.put("pear", new SimpleEntry<>(2, 45));
-
         // TODO: Do we sell lychee?
+        String lychee = "lychee";
+        String pineapple = "pineapple";
+        String banana = "banana";
+
+        Map<String, Entry<Integer, Integer>> ll = withOffers(3, apple, 130);
+        ll.put(pear, new SimpleEntry<>(2, 45));
         int result = checkout.pay(
                 forFruits(
-                        apple, pear, apple,pear, "lychee", apple, "banana", "pineapple"), ll);
+                        apple, pear, apple,pear, lychee, apple, banana, pineapple), ll);
 
         assertEquals(455, result);
     }
+
 }
