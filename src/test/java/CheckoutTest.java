@@ -64,11 +64,11 @@ public class CheckoutTest {
 
         Map<String, Entry<Integer, Integer>> ll = withOffers(3, apple, 130);
         ll.put(pear, new SimpleEntry<>(2, 45));
-        int result = checkout.pay(
-                forFruits(
-                        apple, pear, apple,pear, lychee, apple, banana, pineapple), ll);
 
-        assertEquals(455, result);
+        int expectedPrice = 455;
+        assertEquals(expectedPrice, checkout.pay(
+                forFruits(
+                        apple, pear, apple,pear, lychee, apple, banana, pineapple), ll));
     }
 
 }
