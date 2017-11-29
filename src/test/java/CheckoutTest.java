@@ -1,5 +1,7 @@
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.util.*;
 import java.util.AbstractMap.SimpleEntry;
@@ -29,6 +31,10 @@ public class CheckoutTest {
         checkout = new Checkout();
     }
 
+    @Rule
+    public ExpectedException itemNotForSale;
+
+
     @Test
     public void shouldSellAnApple() {
         int expectedPrice = 50;
@@ -53,13 +59,14 @@ public class CheckoutTest {
         assertEquals(expectedPrice, checkout.pay(forFruits(banana), withOffers(1, banana, 60)));
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void whatDoesItHappenIfITryToSellStrawberries() throws Exception {
         String strawberry = "strawberry";
 
-        int expectedPrice = 123;
+        checkout.pay(forFruits(strawberry), withNoOffers);
 
-        assertEquals(expectedPrice, checkout.pay(forFruits(strawberry), withNoOffers));
+        itemNotForSale.expect(RuntimeException.class);
+        itemNotForSale.expectMessage("This item strawberry is not in the pricelist!");
     }
 
     @Test
@@ -67,7 +74,6 @@ public class CheckoutTest {
         String apple = "apple";
         String pear = "pear";
         // TODO: Do we sell lychee?
-        String lychee = "lychee";
         String pineapple = "pineapple";
         String banana = "banana";
 
@@ -77,7 +83,7 @@ public class CheckoutTest {
         int expectedPrice = 455;
         assertEquals(expectedPrice, checkout.pay(
                 forFruits(
-                        apple, pear, apple,pear, lychee, apple, banana, pineapple), ll));
+                        apple, pear, apple,pear, apple, banana, pineapple), ll));
     }
 
 }

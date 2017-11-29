@@ -5,17 +5,24 @@ import java.util.Map.Entry;
 
 public class Checkout {
     public int pay(List<String> items, Map<String, Entry<Integer, Integer>> offers) {
+        Map<String, Integer> priceList = new HashMap<>();
+        priceList.put("apple", 50);
+        priceList.put("pear", 30);
+        priceList.put("pineapple", 220);
+        priceList.put("banana", 60);
+
+        for (String item: items) {
+            if(!priceList.containsKey(item)){
+                throw new RuntimeException(String.format("This item %s is not in the pricelist!", item));
+            }
+        }
+
         int grandTotal = 0;
         int apples = 0;
         int pears = 0;
         int pineapples = 0;
         int banana = 0;
 
-        Map<String, Integer> priceList = new HashMap<>();
-        priceList.put("apple", 50);
-        priceList.put("pear", 30);
-        priceList.put("pineapple", 220);
-        priceList.put("banana", 60);
 
         for (String item : items) {
             switch (item) {
